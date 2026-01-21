@@ -8,8 +8,11 @@ return {
         {
             "neovim/nvim-lspconfig",
             config = function()
-                --Delete defualt key and replace below to: <leader>e
+                --Delete default key and replace below
+                -- replace with <leader>ce
                 vim.keymap.del("n", "<C-w>d")
+                -- replace with <leader>ca
+                vim.keymap.del("n", "gra")
 
                 vim.api.nvim_create_autocmd("LspAttach", {
                     callback = function(args)
@@ -21,6 +24,7 @@ return {
                         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                         vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, opts)
+                        vim.keymap.set("n", "<leader>csa", vim.diagnostic.setloclist, opts)
                     end,
                 })
             end,
