@@ -5,20 +5,25 @@ return {
     },
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
-        {"neovim/nvim-lspconfig",
-        config = function()
-            vim.api.nvim_create_autocmd('LspAttach', {
-                callback = function(args)
-                    local opts = { buffer = args.buf }
-                    -- Add diagnostic popup -> { current_line = true } | always = true | disable = false
-                    -- virtual_lines (diagnostic below line, more details), virtual_text (diagnostic next to line, less info) 
-                    vim.diagnostic.config({ virtual_lines = false, virtual_text = { current_line = true } })
-                    -- Keymaps
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-                    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-                end,
-            })
-        end,
+        {
+            "neovim/nvim-lspconfig",
+            config = function()
+                --Delete defualt key and replace below to: <leader>e
+                vim.keymap.del("n", "<C-w>d")
+
+                vim.api.nvim_create_autocmd("LspAttach", {
+                    callback = function(args)
+                        local opts = { buffer = args.buf }
+                        -- Add diagnostic popup -> { current_line = true } | always = true | disable = false
+                        -- virtual_lines (diagnostic below line, more details), virtual_text (diagnostic next to line, less info)
+                        vim.diagnostic.config({ virtual_lines = false, virtual_text = { current_line = true } })
+                        -- Keymaps
+                        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                        vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, opts)
+                    end,
+                })
+            end,
         },
     },
 }
