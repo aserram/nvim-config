@@ -14,14 +14,6 @@ return {
 					dap = { justMyCode = false },
 					args = { "--log-level", "DEBUG" },
 					runner = "pytest",
-					python = "venv_lnx/bin/python",
-					-- python = function()
-					-- 	local venv = os.getenv("VIRTUAL_ENV")
-					-- 	if venv and #venv > 0 then
-					-- 		return venv .. "/bin/python"
-					-- 	end
-					-- 	return "python"
-					-- end,
 				}),
 			},
 		})
