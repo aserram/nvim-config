@@ -14,3 +14,7 @@ vim.opt.incsearch = true
 
 -- Min lines above/below cursor
 vim.opt.scrolloff = 10
+
+-- Case insensitive unless capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
