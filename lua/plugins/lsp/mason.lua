@@ -8,6 +8,13 @@ return {
         {
             "neovim/nvim-lspconfig",
             config = function()
+                -- 1. Manually ensure StyLua is installed since it's not an LSP
+                local mr = require("mason-registry")
+                local tool = "stylua"
+                if not mr.is_installed(tool) then
+                    vim.cmd("MasonInstall " .. tool)
+                end
+
                 --Delete default key and replace below
                 -- replace with <leader>ce
                 vim.keymap.del("n", "<C-w>d")
