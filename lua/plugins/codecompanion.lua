@@ -4,34 +4,37 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
-	opts = {
-		-- Adapter definitions
-		adapters = {
-			ollama = function()
-				return require("codecompanion.adapters").extend("ollama", {
-					env = {
-						url = "http://localhost:11434",
-					},
-					schema = {
-						model = {
-							default = "qwen2.5:7b-instruct-q5_K_M",
-						},
-					},
-				})
-			end,
-		},
-
-		-- Match the structure from the official docs
-		interactions = {
-			chat = {
-				adapter = "ollama",
-				model = "qwen2.5:7b-instruct-q5_K_M",
+	config = function()
+		require("codecompanion").setup({
+			strategies = {
+				chat = {
+					adapter = "ollama",
+				},
+				inline = {
+					adapter = "ollama",
+				},
+				agent = {
+					adapter = "ollama",
+				},
 			},
-		},
-
-		-- NOTE: log_level lives in opts.opts (yes, a little weird)
-		opts = {
-			log_level = "DEBUG",
-		},
-	},
+			adapters = {
+				ollama = function()
+					return require("codecompanion.adapters").extend("ollama", {
+						name = "qwen2.5:7b-instruct-q5_K_M",
+						schema = {
+							model = {
+								default = "qwen2.5:7b-instruct-q5_K_M",
+							},
+							num_ctx = {
+								default = 8192,
+							},
+							num_predict = {
+								default = -1,
+							},
+						},
+					})
+				end,
+			},
+		})
+	end,
 }
