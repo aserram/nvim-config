@@ -7,6 +7,14 @@ return {
 	},
 	config = function()
 		require("codecompanion").setup({
+			display = {
+				chat = {
+					window = {
+						position = "right",
+						width = 0.35,
+					},
+				},
+			},
 			strategies = {
 				chat = {
 					adapter = "ollama",
