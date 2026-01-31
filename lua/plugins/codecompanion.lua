@@ -29,10 +29,10 @@ return {
 			adapters = {
 				ollama = function()
 					return require("codecompanion.adapters").extend("ollama", {
-						name = "qwen2.5:7b-instruct-q5_K_M",
+						name = "qwen2.5:7b-instruct-q5_K_M_pycoder",
 						schema = {
 							model = {
-								default = "qwen2.5:7b-instruct-q5_K_M",
+								default = "qwen2.5:7b-instruct-q5_K_M_pycoder",
 							},
 							num_ctx = {
 								default = 8192,
