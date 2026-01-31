@@ -7,6 +7,7 @@ return {
 		{ "mason-org/mason.nvim", opts = {} },
 		{
 			"neovim/nvim-lspconfig",
+			event = { "BufReadPre", "BufNewFile" },
 			config = function()
 				-- 1. Manually ensure StyLua is installed since it's not an LSP
 				local mr = require("mason-registry")
@@ -23,7 +24,7 @@ return {
 
 				vim.api.nvim_create_autocmd("LspAttach", {
 					callback = function(args)
-						local opts = { buffer = args.buf }
+						local opts = { buffer = args.buf, silent = true }
 						-- Add diagnostic popup -> { current_line = true } | always = true | disable = false
 						-- virtual_lines (diagnostic below line, more details), virtual_text (diagnostic next to line, less info)
 						vim.diagnostic.config({
@@ -31,15 +32,19 @@ return {
 							virtual_text = false,
 						})
 						-- Keymaps
+						opts.desc = "LSP: hover"
 						vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-						vim.keymap.set(
-							"n",
-							"<leader>ca",
-							vim.lsp.buf.code_action,
-							vim.tbl_extend("force", opts, { desc = "LSP: Code actions" })
-						)
+
+						opts.desc = "LSP: code actions"
+						vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+						-- opts.desc = "LSP: diagnostic"
 						-- vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, opts)
+
+						opts.desc = "LSP: diagnostics list"
 						vim.keymap.set("n", "<leader>cd", vim.diagnostic.setloclist, opts)
+
+						opts.desc = "LSP: format"
 						vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, opts)
 
 						-- 3. Auto-format on save

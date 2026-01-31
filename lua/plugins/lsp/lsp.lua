@@ -2,8 +2,8 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     event = "InsertEnter",
     dependencies = {
-        -- { "antosha417/nvim-lsp-file-operations", config = true },
-        { "folke/lazydev.nvim", opts = {} },
+        { "antosha417/nvim-lsp-file-operations", config = true },
+        { "folke/lazydev.nvim",                  opts = {} },
     },
     config = function()
         -- Setup LSP capabilities for autocompletion
