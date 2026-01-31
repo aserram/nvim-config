@@ -4,11 +4,11 @@ return {
         ---@module 'undotree.collector'
         ---@type UndoTreeCollector.Opts
         opts = {
-        -- your options
+            -- your options
         },
         config = function()
             -- Keymap for toggling undotree
-            vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
         end,
     },
 }
