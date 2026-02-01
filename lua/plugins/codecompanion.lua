@@ -15,34 +15,26 @@ return {
 					},
 				},
 			},
-			strategies = {
+			interactions = {
 				chat = {
-					adapter = "ollama",
+					-- You can specify an adapter by name and model (both ACP and HTTP)
+					adapter = {
+						name = "ollama",
+						model = "qwen2.5:7b-instruct-q5_K_M_pycoder",
+					},
 				},
 				inline = {
-					adapter = "ollama",
+					adapter = {
+						name = "ollama",
+						model = "qwen2.5:7b-instruct-q5_K_M_pycoder",
+					},
 				},
-				agent = {
-					adapter = "ollama",
+				cmd = {
+					adapter = {
+						name = "ollama",
+						model = "qwen2.5:7b-instruct-q5_K_M_pycoder",
+					},
 				},
-			},
-			adapters = {
-				ollama = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						name = "qwen2.5:7b-instruct-q5_K_M_pycoder",
-						schema = {
-							model = {
-								default = "qwen2.5:7b-instruct-q5_K_M_pycoder",
-							},
-							num_ctx = {
-								default = 8192,
-							},
-							num_predict = {
-								default = -1,
-							},
-						},
-					})
-				end,
 			},
 		})
 		-- Keymaps
